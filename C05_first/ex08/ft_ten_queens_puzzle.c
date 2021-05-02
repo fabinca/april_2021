@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <malloc.h>
-#include <stdio.h>
 
 void initialize(char *array, int len)
 {
@@ -21,67 +19,49 @@ void initialize(char *array, int len)
 	i = 0;
 	while (i < len)
 	{
-		array[i] = '0';
+		array[i] = 'b';
 		i++;
 	}
+	array[i] = 0;
 }
 
-char	*ft_strcpy(char *dest, char *src)
+void print_solution(char row[10])
 {
+	char print_it;
 	int i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (row[i])   //f.e. "abcdefghij"
 	{
-		dest[i] = src[i];
+		print_it = row[i] - 49;
+		write(1, &print_it, 1);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	write(1, "\n", 1);
 }
 
-
-void solve(int col, char **lines, int n)
+void solve_recursive(int col, char row[10], char dia_left[19], char dia_right[19])
 {
-	char *row_cp;
-	char *dia_left_cp;
-	char *dia_right_cp;
-	char **lines_cp;
-
-	row_cp = (char*)malloc(n + 1);
-	dia_right_cp = (char*)malloc(2 * n);
-	dia_left_cp = (char*)malloc(2 * n);
-	lines_cp = (char**)malloc(3 + 1);
-	*row_cp = *lines[0];
-	lines_cp[0] = row_cp;
-	lines_cp[1] = dia_left_cp;
-	lines_cp[2] = dia_right_cp;
-	printf("%s\n%s", lines[0], row_cp);
-	free(row_cp);
-	free(dia_right_cp);
-	free(dia_left_cp);
-	free(lines_cp);
+	if (col < 10)
+	{
+		//put_next_queen(col + 1, lines_cp);
+	}
+	else
+		print_solution(row);
 }
 
-int	ft_ten_queens_puzzle(int n)
+int	ft_ten_queens_puzzle(void)
 {
-	char *row;
-	char *dia_left;
-	char *dia_right;
-	char **lines;
+	char row[10];
+	char dia_left[19];
+	char dia_right[19];
 	int col;
 
-	col = 0;
-	row = (char*)malloc(n + 1);
-	dia_right = (char*)malloc(2 * n);
-	dia_left = (char*)malloc(2 * n);
-	lines = (char**)malloc(3 + 1);
-	lines[0] = row;
-	lines[1] = dia_left;
-	lines[2] = dia_right;
-	initialize(row, n);
-	initialize(dia_left, 2 * n - 1);
-	initialize(dia_right, 2 * n - 1);
-	solve(col, lines, n);
+	col = 10;
+	initialize(row, 10);
+	initialize(dia_left, 19);
+	initialize(dia_right, 19);
+	print_solution(row);
+	//solve_recursive(col, row, dia_left, dia_right);
 	return (0);
 }
