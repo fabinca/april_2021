@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 
 void initialize(char *array, int len)
 {
@@ -33,8 +34,8 @@ void print_solution(char row[10])
 	i = 0;
 	while (row[i])   //f.e. "abcdefghij"
 	{
-		print_it = row[i] - 49;
-		write(1, &print_it, 1);
+		//print_it = row[i] - 49;
+		write(1, &row[i], 1);
 		i++;
 	}
 	write(1, "\n", 1);
@@ -59,8 +60,11 @@ int	ft_ten_queens_puzzle(void)
 
 	col = 10;
 	initialize(row, 10);
+	printf("row: %s\n", row);
 	initialize(dia_left, 19);
+	printf("dia_left: %s\n", dia_left);
 	initialize(dia_right, 19);
+	printf("dia_right: %s\n", dia_right);
 	print_solution(row);
 	//solve_recursive(col, row, dia_left, dia_right);
 	return (0);
