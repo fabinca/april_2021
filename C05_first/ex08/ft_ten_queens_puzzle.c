@@ -10,43 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	initialize(char array[10][10])
-{
-	int row;
-	int col;
+#include <unistd.h>
+#include <malloc.h>
 
-	row = 0;
-	while (row <= 10)
+void initialize(char *array, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
 	{
-		col = 0;
-		while (col <= 10)
-		{
-			array[row][col] = '0';
-			col++;
-		}
-		row++;
+		array[i] = '0';
+		i++;
 	}
 }
 
-int	ft_ten_queens_puzzle(void)
+int	ft_ten_queens_puzzle(int n)
 {
-	char 	grid[10][10];
-	char 	queens[10];
-	int		row;
-	int		col;
+	char *row;
+	char *dia_left;
+	char *dia_right;
+	int col;
 
-	initialize(grid);
-	row = 0;
-	while (row <= 10)
+	col = 0;
+	row = (char*)malloc(n + 1);
+	dia_right = (char*)malloc(2 * n);
+	dia_left = (char*)malloc(2 * n);
+	initialize(row, n);
+	initialize(dia_left, 2 * n - 1);
+	initialize(dia_right, 2 * n - 1);
+	while (col < n)
 	{
-		col = 0;
-		while (col <= 10)
-		{
-			
-			array[row][col] = '0';
-			col++;
-		}
-		row++;
+		//put_next_queen(row);
+		col++;
 	}
-	
+	return (0);
 }
