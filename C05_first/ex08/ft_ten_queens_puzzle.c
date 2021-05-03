@@ -13,14 +13,14 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void initialize(char *array, int len)
+void initialize(char array[10])
 {
 	int i;
 
 	i = 0;
-	while (i < len)
+	while (i < 10)
 	{
-		array[i] = '.';
+		array[i] = '0';
 		i++;
 	}
 	array[i] = 0;
@@ -41,29 +41,43 @@ void print_solution(char row[10])
 	write(1, "\n", 1);
 }
 
-void solve_recursive(int col, char row[10], char dia_left[19], char dia_right[19])
+int char_not_in_array(char letter, char array[10], int col)
+{
+	int i;
+
+	i = 0;
+	while (i < col)
+	{
+		if (array[i] == letter)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void solve_recursive(int col, char row[10], char dia_left[10], char dia_right[10])
 {
 	char next_row;
 
 	next_row = 'A';
 	if (col < 10)
 	{
-		printf("col: %d\n", col);
+		/*printf("col: %d\n", col);
 		printf("dia_right: %s\n", dia_right);
 		printf("dia_left: %s\n", dia_left);
-		printf("row: %s\n", row);
+		printf("row: %s\n", row);*/
 		while (next_row <= 'J')
 		{
-			if (char_in_array(next_row, row))
-				continue;
-			else if (char_in_array(, dia_left))
-				continue;
-			else if (char_in_array(, dia_left))
-				continue;
-			else
-			
+			if (char_not_in_array(next_row, row, col) && char_not_in_array(next_row + col, dia_left, col) &&
+			 char_not_in_array(next_row + 9 - col, dia_left, col))
+			{
+				row[col] = next_row;
+				dia_left[col] = next_row + col;
+				dia_right[col] = next_row + 9 - col;
+				solve_recursive(col + 1, row, dia_left, dia_right);
+			}
+			next_row++;
 		}
-		
 	}
 	else
 		print_solution(row);
@@ -72,14 +86,14 @@ void solve_recursive(int col, char row[10], char dia_left[19], char dia_right[19
 int	ft_ten_queens_puzzle(void)
 {
 	char row[10];
-	char dia_left[19];
-	char dia_right[19];
+	char dia_left[10];
+	char dia_right[10];
 	int col;
 
-	col = 10;
-	initialize(row, 10);
-	initialize(dia_left, 19);
-	initialize(dia_right, 19);
+	col = 0;
+	initialize(row);
+	initialize(dia_left);
+	initialize(dia_right);
 	print_solution(row);
 	solve_recursive(col, row, dia_left, dia_right);
 	return (0);
