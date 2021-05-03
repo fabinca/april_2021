@@ -32,7 +32,7 @@ void print_solution(char row[11])
 	int i;
 
 	i = 0;
-	while (i < 5)   //f.e. "abcdefghij"
+	while (i < 10)   //f.e. "abcdefghij"
 	{
 		print_it = row[i] - 17;
 		write(1, &print_it, 1);
@@ -55,7 +55,7 @@ int char_not_in_array(char letter, char array[11], int col)
 	return (1);
 }
 
-void solve_recursive(int col, char *lines[3])
+void solve_recursive(int col, char *lines[3], int *count)
 {
 	char next_row;
 
@@ -70,13 +70,16 @@ void solve_recursive(int col, char *lines[3])
 				lines[0][col] = next_row;
 				lines[1][col] = next_row + col;
 				lines[2][col] = next_row + 9 - col;
-				solve_recursive(col + 1, lines);
+				solve_recursive(col + 1, lines, count);
 			}
 			next_row++;
 		}
 	}
 	else
+	{
 		print_solution(lines[0]);
+		count[0]++;
+	}
 }
 
 int	ft_ten_queens_puzzle(void)
@@ -86,14 +89,16 @@ int	ft_ten_queens_puzzle(void)
 	char dia_right[11];
 	char *lines[3];
 	int col;
+	int count;
 
 	col = 0;
+	count = 0;
 	lines[0] = row;
 	lines[1] = dia_left;
 	lines[2] = dia_right;
-	//initialize(row);
-	//initialize(dia_left);
-	//initialize(dia_right);
-	solve_recursive(col, lines);
-	return (0);
+	initialize(row);
+	initialize(dia_left);
+	initialize(dia_right);
+	solve_recursive(col, lines, &count);
+	return (count);
 }
