@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-int	ft_ten_queens_puzzle(void);
+int	n_queens(int n);
 
 int	main(void)
 {
 	int solutions;
 
-	solutions = ft_ten_queens_puzzle();
+	solutions = n_queens(15);
 	printf("%d", solutions);
 
 	return(0);

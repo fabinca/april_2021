@@ -12,12 +12,12 @@
 
 #include <unistd.h>
 
-void initialize(char array[11])
+void initialize(char *array, int n)
 {
 	int i;
 
 	i = 0;
-	while (i < 10)
+	while (i < n)
 	{
 		array[i] = '0';
 		i++;
@@ -25,22 +25,7 @@ void initialize(char array[11])
 	array[i] = 0;
 }
 
-void print_solution(char row[11])
-{
-	char print_it;
-	int i;
-
-	i = 0;
-	while (i < 10)
-	{
-		print_it = row[i] - 17;
-		write(1, &print_it, 1);
-		i++;
-	}
-	write(1, "\n", 1);
-}
-
-int char_not_in_array(char letter, char array[11], int col)
+int char_not_in_array(char letter, char *array, int col)
 {
 	int i;
 
@@ -54,38 +39,37 @@ int char_not_in_array(char letter, char array[11], int col)
 	return (1);
 }
 
-void solve_recursive(int col, char *lines[3], int *count)
+void solve_recursive(int col, char *lines[3], int *count, int n)
 {
 	char next_row;
 
 	next_row = 'A';
-	if (col < 10)
+	if (col < n)
 	{
-		while (next_row <= 'J')
+		while (next_row <= 'A' + n - 1)
 		{
 			if (char_not_in_array(next_row, lines[0], col) && char_not_in_array(next_row + col, lines[1], col) &&
-			 char_not_in_array(next_row + 9 - col, lines[2], col))
+			 char_not_in_array(next_row + n - 1 - col, lines[2], col))
 			{
 				lines[0][col] = next_row;
 				lines[1][col] = next_row + col;
-				lines[2][col] = next_row + 9 - col;
-				solve_recursive(col + 1, lines, count);
+				lines[2][col] = next_row + n - 1 - col;
+				solve_recursive(col + 1, lines, count, n);
 			}
 			next_row++;
 		}
 	}
 	else
 	{
-		print_solution(lines[0]);
 		count[0]++;
 	}
 }
 
-int	ft_ten_queens_puzzle(void)
+int	n_queens(int n)
 {
-	char row[11];
-	char dia_left[11];
-	char dia_right[11];
+	char row[n + 1];
+	char dia_left[n + 1];
+	char dia_right[n + 1];
 	char *lines[3];
 	int col;
 	int count;
@@ -95,9 +79,9 @@ int	ft_ten_queens_puzzle(void)
 	lines[0] = row;
 	lines[1] = dia_left;
 	lines[2] = dia_right;
-	initialize(row);
-	initialize(dia_left);
-	initialize(dia_right);
-	solve_recursive(col, lines, &count);
+	initialize(row, n);
+	initialize(dia_left, n);
+	initialize(dia_right, n);
+	solve_recursive(col, lines, &count, n);
 	return (count);
 }
