@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cfabian <cfabian@student.42wolfsburg.de    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 21:16:28 by cfabian           #+#    #+#             */
-/*   Updated: 2021/04/28 17:04:20 by cfabian          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/* s1 > s2 (first unmatching ASCI value) -> return difference but only first n bytes */ 
 
 int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
