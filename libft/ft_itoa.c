@@ -18,33 +18,33 @@ int     how_many_digits(int n)
     return (digits);
 }
 
-void    putnbr_to_str(int n, char **str_p)
+void    putnbr_to_str(int n, char *str, int i)
 {
     if (n >= 10)
     {
-        putnbr_to_str(n / 10, str_p);
-        putnbr_to_str(n % 10, str_p);
+        putnbr_to_str(n / 10, str, i - 1);
+        putnbr_to_str(n % 10, str, i);
     }
     else
     {
-        **str_p = n + '0';
-        *str_p++;
+        str[i] = n + '0';
     }
 }
 
 char    *ft_itoa(int n)
 {
     char    *str;
-    char    *loc;
+    int     i;
     int     isneg;
     int     strlen;
 
-    if (n = -2147483648)
+    if (n == -2147483648)
     {
         str = (char*)malloc(12);
         str = "-2147483648";
         return (str);
     }
+    i = 0;
     strlen = 0;
     isneg = 0;
     if (n < 0)
@@ -55,13 +55,12 @@ char    *ft_itoa(int n)
     }
     strlen += how_many_digits(n);
     str = (char*)malloc(strlen + 1);
-    loc = str;
     if (isneg)
     {
-        str = '-';
-        str++;
+        str[i] = '-';
+        i++;
     }
-    putnbr_to_str(n, &str);
-    str = 0;
-    return (loc);
+    putnbr_to_str(n, str, strlen - 1);
+    str[strlen] = 0;
+    return (str);
 }
