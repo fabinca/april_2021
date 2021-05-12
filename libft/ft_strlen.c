@@ -1,18 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cfabian <cfabian@student.42wolfsburg.de    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 10:04:42 by cfabian           #+#    #+#             */
-/*   Updated: 2021/04/28 10:11:17 by cfabian          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <unistd.h>
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int len;
+	size_t len;
 
 	len = 0;
 	while (str[len] != 0)
