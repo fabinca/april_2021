@@ -15,5 +15,5 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
         i++;
     }
     ptr[i] = 0;
-    return (ptr);        
+    return (ptr);
 }
