@@ -14,7 +14,7 @@
 
 #include <unistd.h>
 
-void *memcpy(void *restrict dest, const void *restrict src, size_t n)
+void *ft_memcpy(void *restrict dest, const void *restrict src, size_t n)
 {
     size_t i;
 
@@ -24,4 +24,5 @@ void *memcpy(void *restrict dest, const void *restrict src, size_t n)
         *((char *)dest + i) = *((char *)src + i);
         i++;
     }
+    return (dest);
 }
