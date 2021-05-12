@@ -8,7 +8,7 @@
 /* integer overflow would not be detected in the following call to */
 /* malloc(), with the result that an incorrectly sized block of */
 /* memory would be allocated: malloc(nmemb * size); */
-/* The malloc() and calloc() functions return a pointer to the */
+/* The malloc() and calloc() functionen return a pointer to the */
 /* allocated memory, which is suitably aligned for any built-in */
 /* type.  On error, these functions return NULL.  NULL may also be */
 /* returned by a successful call to malloc() with a size of zero, or */
@@ -22,7 +22,7 @@
 
 #include <malloc.h>
 
-void *calloc(size_t nmemb, size_t size)
+void    *calloc(size_t nmemb, size_t size)
 {
     void *ptr;
     unsigned int i;
