@@ -1,16 +1,27 @@
-/* The C library function void *memcpy(void *dest, const void *src, size_t n) */
-/* copies n characters from memory area src to memory area dest. */
-/* Parameters */
-/* dest − This is pointer to the destination array where the content is to be  */
-/* copied, type-casted to a pointer of type void*. */
-/* src − This is pointer to the source of data to be copied,  */
-/* type-casted to a pointer of type void*. */
-/* n − This is the number of bytes to be copied. */
-/* This function returns a pointer to destination, which is str1. */
+/* DESCRIPTION         */
+/* The memcpy() function copies n bytes from memory area src to */
+/* memory area dest.  The memory areas must not overlap.  Use */
+/* memmove(3) if the memory areas do overlap. */
+/* RETURN VALUE         */
+/* The memcpy() function returns a pointer to dest. */
+/* Failure to observe the requirement that the memory areas do not */
+/* overlap has been the source of significant bugs.  (POSIX and the */
+/* C standards are explicit that employing memcpy() with overlapping */
+/* areas produces undefined behavior.) */
+/* Note that the purpose of restrict is to show only syntax. It doesn't */
+/* change anything in output (or logic). It is just a way for programmer */
+/* to tell compiler about an optimization  */
 
 #include <unistd.h>
 
-void *memcpy(void *dest, const void *src, size_t n)
+void *memcpy(void *restrict dest, const void *restrict src, size_t n)
 {
+    size_t i;
 
+    i = 0;
+    while (i < n)
+    {
+        *((char *)dest + i) = *((char *)src + i);
+        i++;
+    }
 }
