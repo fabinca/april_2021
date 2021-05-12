@@ -15,12 +15,13 @@
      strlcat() from running off the end of a string.  In practice this should not happen (as it means that either size is in‐
      correct or that dst is not a proper “C” string).  The check exists to prevent potential security problems in incorrect
      code. */
+#include <unistd.h>
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *restrict dest, const char *restrict src, size_t size)
 {
-	unsigned int i;
-	unsigned int j;
-	unsigned int strl_dest;
+	size_t i;
+	size_t j;
+	size_t strl_dest;
 
 	i = 0;
 	j = 0;

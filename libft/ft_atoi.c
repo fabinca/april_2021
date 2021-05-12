@@ -1,20 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cfabian <cfabian@student.42wolfsburg.de    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 11:05:58 by cfabian           #+#    #+#             */
-/*   Updated: 2021/04/29 15:15:30 by cfabian          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <unistd.h>
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
-	unsigned int	i;
-	int				num;
-	int				negative_ct;
+	size_t	i;
+	int		num;
+	int		negative_ct;
 
 	i = 0;
 	num = 0;
