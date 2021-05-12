@@ -9,7 +9,7 @@
 /* n − This is the number of bytes to be set to the value. */
 /* This function returns a pointer to the memory area str. */
 
-#include <stdlib.h>
+#include <unistd.h>
 
 void *ft_memset(void *str, int c, size_t n)
 {
